@@ -32,8 +32,6 @@
         <constructor-arg ref="rider1"/>
         <constructor-arg value="BREED1"/>
         <constructor-arg value="0"/>
-        <constructor-arg value="false"/>
-
     </bean>
     <bean id="horse2"
           class="com.roman.domain.Horse">
@@ -41,7 +39,6 @@
         <constructor-arg ref="rider3"/>
         <constructor-arg value="BREED1"/>
         <constructor-arg value="0"/>
-        <constructor-arg value="false"/>
     </bean>
     <bean id="horse3"
           class="com.roman.domain.Horse">
@@ -49,15 +46,13 @@
         <constructor-arg ref="rider2"/>
         <constructor-arg value="BREED3"/>
         <constructor-arg value="0"/>
-        <constructor-arg value="false"/>
-    </bean>
+     </bean>
     <bean id="horse4"
           class="com.roman.domain.Horse">
         <constructor-arg value="Horse4"/>
         <constructor-arg ref="rider5"/>
         <constructor-arg value="BREED1"/>
         <constructor-arg value="0"/>
-        <constructor-arg value="false"/>
     </bean>
     <bean id="horse5"
           class="com.roman.domain.Horse">
@@ -65,10 +60,9 @@
         <constructor-arg ref="rider4"/>
         <constructor-arg value="BREED2"/>
         <constructor-arg value="0"/>
-        <constructor-arg value="false"/>
     </bean>
-    <bean id="horseServiceImp"
-          class="com.roman.service.HorseServiceImp">
+    <bean id="horseServiceImpl"
+          class="com.roman.service.HorseServiceImpl">
         <property name="horsesList">
             <list>
                 <ref bean="horse1"/>
@@ -79,15 +73,15 @@
             </list>
         </property>
     </bean>
-    <bean id="raceServiceImp"
-          class="com.roman.service.RaceServiceImp">
-        <property name="numOfHorsesInRace" value="5"/>
-        <property name="trackLength" value="15"/>
-        <property name="horseServiceImp" ref="horseServiceImp"/>
+    <bean id="raceServiceImpl"
+          class="com.roman.service.RaceServiceImpl">
+        <property name="numOfHorsesInRace" value="3"/>
+        <property name="distance" value="15"/>
+        <property name="horseService" ref="horseServiceImpl"/>
     </bean>
-    <bean id="emulationServiceImp"
-          class="com.roman.service.EmulationServiceImp">
-        <property name="raceServiceImp" ref="raceServiceImp"/>
-        <property name="horseServiceImp" ref="horseServiceImp"/>
+    <bean id="emulationServiceImpl"
+          class="com.roman.service.EmulationServiceImpl">
+        <property name="raceService" ref="raceServiceImpl"/>
+        <property name="horseService" ref="horseServiceImpl"/>
     </bean>
 </beans>

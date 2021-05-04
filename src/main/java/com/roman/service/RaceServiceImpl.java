@@ -6,13 +6,13 @@ import com.roman.domain.Race;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaceServiceImp implements RaceService {
+public class RaceServiceImpl implements RaceService {
 
     private int numOfHorsesInRace;
     private int distance;
     private HorseService horseService;
 
-    public RaceServiceImp() {
+    public RaceServiceImpl() {
     }
 
     public int getNumOfHorsesInRace() {
@@ -45,16 +45,6 @@ public class RaceServiceImp implements RaceService {
         race.setHorsesList(generateHorsesListInRace());
         return race;
     }
-
-    //    public void getRaceInfo() {
-//        List<Horse> horsesListInRace = generateHorsesListInRace();
-//        System.out.printf("%-10s%-10s%-10s%-10s%n","Number","Horse","Rider","Breed");
-//        int count = 1;
-//        for (Horse horse : horsesListInRace) {
-//            System.out.printf("%-10d%-10s%-10s%-10s%n",count++,horse.getHorseName(),horse.getRider(),horse.getBreed());
-//        }
-//        System.out.println();
-//    }
 
     public List<Horse> generateHorsesListInRace () {
         int randomNumOfHorse;

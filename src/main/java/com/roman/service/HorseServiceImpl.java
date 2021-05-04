@@ -5,15 +5,11 @@ import com.roman.domain.Horse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorseServiceImp implements HorseService {
+public class HorseServiceImpl implements HorseService {
 
     private List<Horse> horsesList = new ArrayList<>();
 
-    public HorseServiceImp() {
-    }
-
-    public HorseServiceImp(List<Horse> horsesList) {
-        this.horsesList = horsesList;
+    public HorseServiceImpl() {
     }
 
     @Override

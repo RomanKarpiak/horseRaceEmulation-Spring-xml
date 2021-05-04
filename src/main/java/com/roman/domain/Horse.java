@@ -1,24 +1,21 @@
 package com.roman.domain;
 
-import java.util.Objects;
-
 public class Horse {
 
     private String horseName;
     private Rider rider;
     private Breed breed;
     private int distance;
-    private boolean isSelected;
+
 
     public Horse() {
     }
 
-    public Horse(String horseName, Rider rider, Breed breed, int distance, boolean isSelected) {
+    public Horse(String horseName, Rider rider, Breed breed, int distance) {
         this.horseName = horseName;
         this.rider = rider;
         this.breed = breed;
         this.distance = distance;
-        this.isSelected = isSelected;
     }
 
     public String getHorseName() {
@@ -51,26 +48,5 @@ public class Horse {
 
     public void setDistance(int distance) {
         this.distance = distance;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Horse horse = (Horse) o;
-        return distance == horse.distance && isSelected == horse.isSelected && Objects.equals(horseName, horse.horseName) && Objects.equals(rider, horse.rider) && breed == horse.breed;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(horseName, rider, breed, distance, isSelected);
     }
 }

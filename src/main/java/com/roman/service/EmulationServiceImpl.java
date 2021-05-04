@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class EmulationServiceImp implements EmulationService {
+public class EmulationServiceImpl implements EmulationService {
 
     private HorseService horseService;
     private RaceService raceService;
 
 
-    public EmulationServiceImp() {
+    public EmulationServiceImpl() {
     }
 
     public HorseService getHorseService() {
@@ -38,9 +38,11 @@ public class EmulationServiceImp implements EmulationService {
         System.out.println("Horse List");
         System.out.println("====================================");
         Race race = raceService.getRace();
-        Horse selectedHorse = selectHorse(race.getHorsesList());
-        startPreparationForRace(race.getHorsesList());
-        finishPreparationForRace(race.getHorsesList());
+        List<Horse> horses = race.getHorsesList();
+        printHorsesList(horses);
+        Horse selectedHorse = selectHorse(horses);
+        startPreparationForRace(horses);
+        finishPreparationForRace(horses);
         System.out.println("");
         System.out.println("====================================");
         System.out.println("HORSE RACE");
@@ -124,6 +126,14 @@ public class EmulationServiceImp implements EmulationService {
                 return selectedHorse;
             }
         }
+    }
+        public void printHorsesList(List<Horse> horses) {
+        System.out.printf("%-10s%-10s%-10s%-10s%n","Number","Horse","Rider","Breed");
+        int count = 1;
+        for (int i = 1; i < horses.size() + 1;i++) {
+            System.out.printf("%-10d%-10s%-10s%-10s%n",i ,horses.get(i-1).getHorseName(),horses.get(i-1).getRider(),horses.get(i-1).getBreed());
+        }
+        System.out.println();
     }
 
     public void startPreparationForRace(List<Horse> horses) {
