@@ -16,6 +16,7 @@ public class HorseServiceImp implements HorseService {
         this.horsesList = horsesList;
     }
 
+    @Override
     public List<Horse> getHorsesList() {
         return horsesList;
     }
@@ -23,20 +24,5 @@ public class HorseServiceImp implements HorseService {
     public void setHorsesList(List<Horse> horsesList) {
         this.horsesList = horsesList;
     }
-
-    @Override
-    public void startPreparationForRace() {
-        for (Horse horse : horsesList) {
-            System.out.println(horse.getHorseName() + " and " + horse.getRider().getRiderName()  + " are being prepared for racing");
-        }
-    }
-
-    @Override
-    public void finishPreparationForRace() {
-        for (Horse horse : horsesList) {
-            System.out.println(horse.getHorseName() + " and " + horse.getRider().getRiderName() + " are ready for the race");
-        }
-    }
-
 
 }
