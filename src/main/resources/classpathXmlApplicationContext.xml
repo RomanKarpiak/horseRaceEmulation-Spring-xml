@@ -75,7 +75,7 @@
     </bean>
     <bean id="raceServiceImpl"
           class="com.roman.service.RaceServiceImpl">
-        <property name="numOfHorsesInRace" value="3"/>
+        <property name="numOfHorsesInRace" value="5"/>
         <property name="distance" value="15"/>
         <property name="horseService" ref="horseServiceImpl"/>
     </bean>

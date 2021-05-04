@@ -34,11 +34,11 @@ public class EmulationServiceImpl implements EmulationService {
 
     @Override
     public void emulate() {
+        Race race = raceService.getRace();
+        List<Horse> horses = race.getHorsesList();
         System.out.println("====================================");
         System.out.println("Horse List");
         System.out.println("====================================");
-        Race race = raceService.getRace();
-        List<Horse> horses = race.getHorsesList();
         printHorsesList(horses);
         Horse selectedHorse = selectHorse(horses);
         startPreparationForRace(horses);
@@ -51,36 +51,24 @@ public class EmulationServiceImpl implements EmulationService {
         System.out.println("====================================");
         System.out.println("GO!!!");
         System.out.println("====================================");
-        startRace(race, selectedHorse);
+        startRace(race);
+        printResultBet(horses,selectedHorse);
+        printLeaderboard(horses);
     }
 
-    private void startRace(Race race, Horse selectedHorse) {
+    private void startRace(Race race) {
         List<Horse> horseListInRace = race.getHorsesList();
         int distance = race.getDistance();
-        Horse horseWinner = null;
-        boolean isFinished = false;
-        int lapCount = 1;
-        while (!isFinished) {
-            System.out.println("##### LAP " + lapCount + "####");
+        int numberOfLaps = 1;
+        while (numberOfLaps != distance) {
+            System.out.println("##### LAP " + numberOfLaps + " ####");
             printPositions(sortByDistance(horseListInRace));
             for (Horse horse : horseListInRace) {
                 int move = 1 + (int) (Math.random() * 6);
                 horse.setDistance(horse.getDistance() + move);
-                if (horse.getDistance() >= distance) {
-                    horseWinner = horse;
-                    isFinished = true;
-                    break;
-                }
             }
-            lapCount++;
+            numberOfLaps++;
         }
-        System.out.println("Winner: " + horseWinner.getHorseName());
-        if (horseWinner.equals(selectedHorse)) {
-            System.out.println("Congratulation!!! You Win!!!");
-        } else {
-            System.out.println("You're out of luck, try again");
-        }
-        printLeaderboard(horseListInRace);
     }
 
     private List<Horse> sortByDistance(List<Horse> horses) {
@@ -94,6 +82,16 @@ public class EmulationServiceImpl implements EmulationService {
         int positionHorse = 1;
         for (Horse horse : horses) {
             System.out.println(horse.getHorseName() + " " + positionHorse++);
+        }
+    }
+    private void printResultBet(List<Horse> horses, Horse  selectedHorse){
+        Horse horseWinner = sortByDistance(horses).get(0);
+        System.out.println("Your horse: " + selectedHorse.getHorseName());
+        System.out.println("Winner: " + horseWinner.getHorseName());
+        if (horseWinner.equals(selectedHorse)) {
+            System.out.println("Congratulation!!! You Win!!!");
+        } else {
+            System.out.println("You're out of luck, try again");
         }
     }
 
@@ -127,11 +125,12 @@ public class EmulationServiceImpl implements EmulationService {
             }
         }
     }
-        public void printHorsesList(List<Horse> horses) {
-        System.out.printf("%-10s%-10s%-10s%-10s%n","Number","Horse","Rider","Breed");
+
+    public void printHorsesList(List<Horse> horses) {
+        System.out.printf("%-10s%-10s%-10s%-10s%n", "Number", "Horse", "Rider", "Breed");
         int count = 1;
-        for (int i = 1; i < horses.size() + 1;i++) {
-            System.out.printf("%-10d%-10s%-10s%-10s%n",i ,horses.get(i-1).getHorseName(),horses.get(i-1).getRider(),horses.get(i-1).getBreed());
+        for (int i = 1; i < horses.size() + 1; i++) {
+            System.out.printf("%-10d%-10s%-10s%-10s%n", i, horses.get(i - 1).getHorseName(), horses.get(i - 1).getRider(), horses.get(i - 1).getBreed());
         }
         System.out.println();
     }
@@ -148,5 +147,4 @@ public class EmulationServiceImpl implements EmulationService {
             System.out.println(horse.getHorseName() + " and " + horse.getRider().getRiderName() + " are ready for the race");
         }
     }
-
 }
