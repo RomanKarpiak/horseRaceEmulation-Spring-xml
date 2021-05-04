@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <bean id="rider1"
+          class="com.roman.domain.Rider">
+        <constructor-arg value="Rider1"/>
+    </bean>
+    <bean id="rider2"
+          class="com.roman.domain.Rider">
+        <constructor-arg value="Rider2"/>
+    </bean>
+    <bean id="rider3"
+          class="com.roman.domain.Rider">
+        <constructor-arg value="Rider3"/>
+    </bean>
+    <bean id="rider4"
+          class="com.roman.domain.Rider">
+        <constructor-arg value="Rider4"/>
+    </bean>
+    <bean id="rider5"
+          class="com.roman.domain.Rider">
+        <constructor-arg value="Rider5"/>
+    </bean>
+    <bean id="horse1"
+          class="com.roman.domain.Horse">
+        <constructor-arg value="Horse1"/>
+        <constructor-arg ref="rider1"/>
+        <constructor-arg value="BREED1"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="false"/>
+
+    </bean>
+    <bean id="horse2"
+          class="com.roman.domain.Horse">
+        <constructor-arg value="Horse2"/>
+        <constructor-arg ref="rider3"/>
+        <constructor-arg value="BREED1"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="false"/>
+    </bean>
+    <bean id="horse3"
+          class="com.roman.domain.Horse">
+        <constructor-arg value="Horse3"/>
+        <constructor-arg ref="rider2"/>
+        <constructor-arg value="BREED3"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="false"/>
+    </bean>
+    <bean id="horse4"
+          class="com.roman.domain.Horse">
+        <constructor-arg value="Horse4"/>
+        <constructor-arg ref="rider5"/>
+        <constructor-arg value="BREED1"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="false"/>
+    </bean>
+    <bean id="horse5"
+          class="com.roman.domain.Horse">
+        <constructor-arg value="Horse5"/>
+        <constructor-arg ref="rider4"/>
+        <constructor-arg value="BREED2"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="false"/>
+    </bean>
+    <bean id="horseServiceImp"
+          class="com.roman.service.HorseServiceImp">
+        <property name="horsesList">
+            <list>
+                <ref bean="horse1"/>
+                <ref bean="horse2"/>
+                <ref bean="horse3"/>
+                <ref bean="horse4"/>
+                <ref bean="horse5"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="raceServiceImp"
+          class="com.roman.service.RaceServiceImp">
+        <property name="numOfHorsesInRace" value="5"/>
+        <property name="trackLength" value="15"/>
+        <property name="horseServiceImp" ref="horseServiceImp"/>
+    </bean>
+    <bean id="emulationServiceImp"
+          class="com.roman.service.EmulationServiceImp">
+        <property name="raceServiceImp" ref="raceServiceImp"/>
+        <property name="horseServiceImp" ref="horseServiceImp"/>
+    </bean>
+</beans>
